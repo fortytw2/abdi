@@ -1,9 +1,9 @@
 Abdi
 -----
-Hide!  [![Build Status](https://travis-ci.org/fortytw2/abdi.svg)](https://travis-ci.org/fortytw2/abdi) [![GoDoc](https://godoc.org/github.com/fortytw2/abdi?status.svg)](http://godoc.org/github.com/fortytw2/abdi)
+[![Build Status](https://travis-ci.org/fortytw2/abdi.svg)](https://travis-ci.org/fortytw2/abdi) [![GoDoc](https://godoc.org/github.com/fortytw2/abdi?status.svg)](http://godoc.org/github.com/fortytw2/abdi)
 
-Dead simple library for verifying and hashing passwords, following the Mozilla
-Password guidelines found [here](https://wiki.mozilla.org/WebAppSec/Secure_Coding_Guidelines#Password_Complexity)
+Hide! - a dead simple library for verifying and hashing passwords, following the
+Mozilla Password guidelines found [here](https://wiki.mozilla.org/WebAppSec/Secure_Coding_Guidelines#Password_Complexity)
 using the prescribed salted bcrypt + hmac.
 
 Contains a 1000 word password Blacklist derived from [here](https://xato.net/passwords/more-top-worst-passwords/)
@@ -45,6 +45,6 @@ func main() {
 
 LICENSE
 ------
-abdi.go and abdi_test.go are Public Domain, see UNLICENSE
+Public Domain, see UNLICENSE
 
-common_passwords.txt
+Blacklist.go is not Public Domain - derived from [here](https://xato.net/passwords/more-top-worst-passwords/)
