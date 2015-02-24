@@ -10,6 +10,11 @@ func TestHash(t *testing.T) {
 		t.Error("password shorter than MinPasswordLength allowed")
 	}
 
+	_, err = Hash("trustno1")
+	if err == nil {
+		t.Error("password not caught by blacklist")
+	}
+
 	str, err := Hash("thisismypassword")
 	if err != nil {
 		t.Error(err)

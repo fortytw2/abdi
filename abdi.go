@@ -12,7 +12,8 @@ import (
 )
 
 var (
-	ErrPasswordTooShort = errors.New("passwords must be 8 characters or greater")
+	ErrPasswordTooShort    = errors.New("passwords must be 8 characters or greater")
+	ErrBlacklistedPassword = errors.New("password is on the blacklist")
 )
 
 // Key is the nonce used for HMAC
@@ -35,6 +36,10 @@ var MinPasswordLength = 8
 func Hash(password string) (string, error) {
 	if utf8.RuneCountInString(password) < MinPasswordLength {
 		return "", ErrPasswordTooShort
+	}
+
+	if err := checkBlacklist(password); err != nil {
+		return "", err
 	}
 
 	passbyte := []byte(password)
@@ -65,6 +70,15 @@ func Check(password string, oldHash string) error {
 		return err
 	}
 
+	return nil
+}
+
+func checkBlacklist(pass string) error {
+	for _, str := range Blacklist {
+		if pass == str {
+			return ErrBlacklistedPassword
+		}
+	}
 	return nil
 }
 
