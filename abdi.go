@@ -32,7 +32,7 @@ var Cost = 10
 // MinPasswordLength allowed by abdi
 var MinPasswordLength = 8
 
-// Hash the password first using salted bcrypt, then sign the hash using HMAC
+// Sign the password first using HMAC, then hash the signed password using salted bcrypt
 func Hash(password string) (string, error) {
 	if utf8.RuneCountInString(password) < MinPasswordLength {
 		return "", ErrPasswordTooShort
