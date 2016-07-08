@@ -3,24 +3,23 @@ package abdi
 import "testing"
 
 func TestHash(t *testing.T) {
-	Key = []byte("mykey")
 
-	_, err := Hash("less8")
+	_, err := Hash("less8", []byte("mykey"))
 	if err == nil {
 		t.Error("password shorter than MinPasswordLength allowed")
 	}
 
-	_, err = Hash("trustno1")
+	_, err = Hash("trustno1", []byte("mykey"))
 	if err == nil {
 		t.Error("password not caught by blacklist")
 	}
 
-	str, err := Hash("thisismypassword")
+	str, err := Hash("thisismypassword", []byte("mykey"))
 	if err != nil {
 		t.Error(err)
 	}
 
-	str2, err := Hash("thisismypassword")
+	str2, err := Hash("thisismypassword", []byte("mykey"))
 	if err != nil {
 		t.Error(err)
 	}
@@ -31,25 +30,21 @@ func TestHash(t *testing.T) {
 }
 
 func TestCheck(t *testing.T) {
-	Key = []byte("mykey")
-
-	str, err := Hash("thisismypassword")
+	str, err := Hash("thisismypassword", []byte("mykey"))
 	if err != nil {
 		t.Error(err)
 	}
 
-	err = Check("thisismypassword", str)
+	err = Check("thisismypassword", *str, []byte("mykey"))
 	if err != nil {
 		t.Error(err)
 	}
 }
 
 func BenchmarkHash(b *testing.B) {
-	Key = []byte("mykey")
-
 	// hash b.N times
 	for n := 0; n < b.N; n++ {
-		_, err := Hash("thisismypassword")
+		_, err := Hash("thisismypassword", []byte("mykey"))
 		if err != nil {
 			b.Error(err)
 		}

@@ -29,14 +29,12 @@ func main() {
 
   // to change the default Blacklist, simply edit abdi.Blacklist, a []string
 
-  abdi.Key = "thisismyhmackey"
-
-  hash, err := abdi.Hash("thispassword")
+  hash, err := abdi.Hash("thispassword", []byte("my hmac key"))
   if err != nil {
     panic(err)
   }
 
-  if err = abdi.Check("thispassword", hash); err == nil {
+  if err = abdi.Check("thispassword", hash, []byte("my hmac key")); err == nil {
     fmt.Println("Password looks good to me :)")
   }
 }
